@@ -1,0 +1,342 @@
+#Experiment no. 1 (runs in pycharm)
+
+nc = int(input("Enter how many players play cricket: "))
+cric = [] 
+for i in range(nc):
+    nc = input("Enter the name of players who play cricket: ")
+    cric.append(nc)
+
+
+nf = int(input("Enter how many players play football: "))
+foot = []  
+for i in range(nf):
+    nf = input("Enter the name of players who play football: ")
+    foot.append(nf)
+
+
+nb = int(input("Enter how many players play badminton: "))
+bad = []  
+for i in range(nb):
+    nb = input("Enter the name of players who play badminton: ")
+    bad.append(nb)
+
+
+def inter(Ist1, Ist2):
+    Result1 = []
+    for i in Ist1:
+        if i in Ist2:
+            Result1.append(i)
+    return Result1
+
+print("The Students who play both cricket and badminton:")
+common_players = inter(cric, bad)
+print(common_players)
+
+
+def union(Ist1, Ist2):
+    Result2 = Ist1.copy()
+    for i in Ist2:
+        if i not in Result2:
+            Result2.append(i)
+    return Result2
+
+
+def diff(Ist1, Ist2):
+    Result3 = []
+    for i in Ist1:
+        if i not in Ist2:
+            Result3.append(i)
+    return Result3
+
+
+def sym_diff(Ist1, Ist2):
+    D1 = diff(Ist1, Ist2)
+    D2 = diff(Ist2, Ist1)
+    Result4 = union(D1, D2)
+    return Result4
+
+
+
+def either_cric_or_bad(cric,bad):
+   Result5 = sym_diff(cric,bad)
+   print("The Students who play either cricket or badminton but not both:",Result5)
+   return Result5
+
+
+def neither_cric_nor_foot(foot, bad, cric):
+    Result6 = diff(foot, union(bad, cric))
+    print("Number of students who play neither Cricket nor Badminton:", Result6)
+
+def cric_foot_but_not_bad(cric, foot, bad):
+    Result7 = diff(inter(cric, foot), bad)
+    print("Number of students who play cricket and football but not Badminton:", Result7)
+
+either_cric_or_bad(cric,bad)
+neither_cric_nor_foot(foot, bad, cric)
+cric_foot_but_not_bad(cric, foot, bad)
+
+
+
+
+
+
+
+
+#Experiment no. 2 (runs in pycharm)
+
+FDS=[]
+N=int(input("Enter the total number of student : "))
+for i in range(N): 
+    marks=int(input("Enter the marks of all students :- "))
+    FDS.append(marks)
+print(FDS)
+
+
+
+def avg(FDS): 
+    a=0 
+    s=0 
+    for i in (FDS): 
+        s=s+i 
+    a=s/N
+    print("Average score of the Class is ",a)
+avg(FDS)
+
+
+def lowest (FDS):
+    max=101
+    for i in FDS: 
+        if (i<max) and (i>0):
+            max=i
+    print("The lowest score of the class is =",max)
+lowest (FDS)
+
+
+
+def highest(FDS):
+    min=0
+    for i in FDS:
+        if (i>min) and (i>0):
+            min=i
+    print("Highest score of class= ",min)
+highest(FDS)
+
+
+def cou(FDS):
+    c=0
+    for i in FDS:
+        if i==-1:
+            c=c+1
+    print("Number of absent student= ",c)
+cou (FDS)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Experiment no. 3 (runs in pycharm)
+
+
+def delete_duplicates(books):
+    unique_books = []
+    for book in books:
+        if book not in unique_books:
+            unique_books.append(book)
+    return unique_books
+
+def ascending_order(books):
+    return sorted(books, key=lambda x: x['cost'])
+
+def count_expensive_books(books):
+    return sum(1 for book in books if book['cost'] > 500)
+
+def copy_low_cost_books(books):
+    return [book for book in books if book['cost'] < 500]
+
+# Get input from the user for the library data
+library = []
+num_books = int(input("Enter the number of books in the library: "))
+for i in range(num_books):
+    book_name = input("Enter the name of Book: ")
+    book_cost = int(input("Enter the cost of Book: "))
+    library.append({'Book': book_name, 'cost': book_cost})
+
+# Delete duplicate entries
+unique_library = delete_duplicates(library)
+
+# Display books in ascending order based on cost
+sorted_library = ascending_order(unique_library)
+
+# Count number of books with cost more than 500
+expensive_books_count = count_expensive_books(sorted_library)
+
+# Copy books with cost less than 500 to a new list
+low_cost_books_list = copy_low_cost_books(sorted_library)
+
+# Display results
+print("Unique Library:", unique_library)
+print("Books in Ascending Order of Cost:", sorted_library)
+print("Number of Books with Cost > 500:", expensive_books_count)
+print("Books with Cost < 500:", low_cost_books_list)
+
+
+
+
+
+
+
+
+
+
+
+
+#Experiment no. 4 (runs in pycharm)
+
+
+def selection_sort(array):
+    n = len(array)
+
+    for i in range(n - 1):
+        min_index = i
+
+        for j in range(i + 1, n):
+            if array[j] < array[min_index]:
+                min_index = j
+
+        array[i], array[min_index] = array[min_index], array[i]
+
+def bubble_sort(array):
+    n = len(array)
+
+    for i in range(n - 1):
+        for j in range(0, n - i - 1):
+            if array[j] > array[j + 1]:
+                array[j], array[j + 1] = array[j + 1], array[j]
+
+# Get input from the user for the percentage data
+percentage_array = []
+num_students = int(input("Enter the number of students: "))
+
+for student_index in range(1, num_students + 1):
+    percentage = float(input(f"Enter the percentage for Student {student_index}: "))
+    percentage_array.append(percentage)
+
+# Sorting using Selection Sort
+selection_sort(percentage_array)
+print("Sorted Array using Selection Sort:", percentage_array)
+
+# Sorting using Bubble Sort
+bubble_sort(percentage_array)
+print("Sorted Array using Bubble Sort:", percentage_array)
+
+
+
+
+
+
+
+
+
+
+Experiment no. 5 (runs in pycharm)
+
+
+
+def insertion_sort(array):
+    for i in range(1, len(array)):
+        key = array[i]
+        j = i - 1
+        while j >= 0 and key < array[j]:
+            array[j + 1] = array[j]
+            j -= 1
+        array[j + 1] = key
+
+def shell_sort(array):
+    n = len(array)
+    gap = n // 2
+    while gap > 0:
+        for i in range(gap, n):
+            temp = array[i]
+            j = i
+            while j >= gap and array[j - gap] > temp:
+                array[j] = array[j - gap]
+                j -= gap
+            array[j] = temp
+        gap //= 2
+
+def top_five(array):
+    sorted_array = sorted(array, reverse=True)[:5]
+    print("Top Five Scores:", sorted_array)
+
+# Taking second-year student percentages as input
+percentage_array = []
+n = int(input("Enter the number of students: "))
+for i in range(n):
+    percentage = float(input(f"Enter percentage for student {i + 1}: "))
+    percentage_array.append(percentage)
+
+# Sorting using Insertion Sort
+insertion_sort(percentage_array)
+print("Sorted Array using Insertion Sort:", percentage_array)
+
+# Sorting using Shell Sort
+shell_sort(percentage_array)
+print("Sorted Array using Shell Sort:", percentage_array)
+
+# Displaying the top five scores
+top_five(percentage_array)
+
+
+
+
+Experiement no. 6 (runs in pycharm)
+
+
+
+
+
+
+def quick_sort(array):
+    if len(array) <= 1:
+        return array
+    else:
+        pivot = array[0]
+        less_than_pivot = [x for x in array[1:] if x <= pivot]
+        greater_than_pivot = [x for x in array[1:] if x > pivot]
+        return quick_sort(less_than_pivot) + [pivot] + quick_sort(greater_than_pivot)
+
+def top_five(array):
+    sorted_array = sorted(array, reverse=True)[:5]
+    print("Top Five Scores:", sorted_array)
+
+# Taking first-year student percentages as input
+percentage_array = []
+n = int(input("Enter the number of students: "))
+for i in range(n):
+    percentage = float(input(f"Enter percentage for student {i + 1}: "))
+    percentage_array.append(percentage)
+
+# Sorting using Quick Sort
+sorted_percentage_array = quick_sort(percentage_array)
+print("Sorted Array using Quick Sort:", sorted_percentage_array)
+
+# Displaying the top five scores
+top_five(sorted_percentage_array)
+
+
+
+
+
+
+
+
+
